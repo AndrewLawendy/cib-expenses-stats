@@ -1,0 +1,43 @@
+{
+  "name": "cib-credit-card-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/App.jsx",
+  "scripts": {
+    "clear-build-cache": "rm -rf .cache/ dist/",
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html -d prod/ --public-url ./ --no-source-maps",
+    "format": "prettier --write \"src/**/*.{js,jsx,scss}\"",
+    "lint": "eslint \"src/**/*.{js,jsx,scss}\" --quiet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewLawendy/cib-credit-card-stats.git"
+  },
+  "author": "Andrew Lawendy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndrewLawendy/cib-credit-card-stats/issues"
+  },
+  "homepage": "https://github.com/AndrewLawendy/cib-credit-card-stats#readme",
+  "dependencies": {
+    "node-sass": "^5.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.1.2",
+    "sass": "^1.29.0"
+  }
+}
