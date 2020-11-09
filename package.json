@@ -5,7 +5,7 @@
   "main": "src/App.jsx",
   "scripts": {
     "clear-build-cache": "rm -rf .cache/ dist/",
-    "dev": "parcel src/index.html",
+    "dev": "parcel --no-hmr src/index.html",
     "build": "parcel build src/index.html -d prod/ --public-url ./ --no-source-maps",
     "format": "prettier --write \"src/**/*.{js,jsx,scss}\"",
     "lint": "eslint \"src/**/*.{js,jsx,scss}\" --fix --cache --quiet"
@@ -21,11 +21,14 @@
   },
   "homepage": "https://github.com/AndrewLawendy/cib-credit-card-stats#readme",
   "dependencies": {
+    "babel-plugin-react-css-modules": "^5.2.6",
     "node-sass": "^5.0.0",
+    "postcss-scss": "^3.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.1"
+    "semantic-ui-react": "^2.0.1",
+    "wouter": "^2.5.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

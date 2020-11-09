@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 
 import "semantic-ui-css/semantic.min.css";
 
+import Nav from "./components/nav/Nav.jsx";
+
 const App = () => {
   return (
     <React.Fragment>
-      <h1>Working...</h1>
+      <Nav />
     </React.Fragment>
   );
 };
