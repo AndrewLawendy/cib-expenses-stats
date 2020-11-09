@@ -8,7 +8,7 @@
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html -d prod/ --public-url ./ --no-source-maps",
     "format": "prettier --write \"src/**/*.{js,jsx,scss}\"",
-    "lint": "eslint \"src/**/*.{js,jsx,scss}\" --quiet"
+    "lint": "eslint \"src/**/*.{js,jsx,scss}\" --fix --cache --quiet"
   },
   "repository": {
     "type": "git",
@@ -39,5 +39,8 @@
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.1.2",
     "sass": "^1.29.0"
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
 }
