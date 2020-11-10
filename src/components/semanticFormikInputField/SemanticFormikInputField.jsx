@@ -18,6 +18,8 @@ export const SemanticFormikInputField = (props) => {
     },
     label,
     type = "text",
+    min,
+    max,
     readOnly,
   } = props;
 
@@ -28,6 +30,8 @@ export const SemanticFormikInputField = (props) => {
         fluid
         label={label}
         type={type}
+        min={min}
+        max={max}
         value={value}
         readOnly={readOnly}
         onChange={(event) => {

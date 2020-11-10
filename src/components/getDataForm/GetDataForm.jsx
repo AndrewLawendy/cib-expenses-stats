@@ -33,6 +33,8 @@ const GetDataForm = () => {
             name="month"
             label="Month"
             type="number"
+            min="1"
+            max="12"
             component={SemanticFormikInputField}
           />
 
@@ -40,6 +42,8 @@ const GetDataForm = () => {
             name="year"
             label="Year"
             type="number"
+            min="1990"
+            max="2120"
             component={SemanticFormikInputField}
           />
 
