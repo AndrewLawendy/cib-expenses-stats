@@ -1,0 +1,9 @@
+.appContainer {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 64px 1fr;
+}
+
+.body {
+  padding: 1rem;
+}

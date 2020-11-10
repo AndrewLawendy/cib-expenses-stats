@@ -22,13 +22,15 @@
   "homepage": "https://github.com/AndrewLawendy/cib-credit-card-stats#readme",
   "dependencies": {
     "babel-plugin-react-css-modules": "^5.2.6",
+    "formik": "^2.2.3",
     "node-sass": "^5.0.0",
     "postcss-scss": "^3.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.1",
-    "wouter": "^2.5.3"
+    "wouter": "^2.5.3",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

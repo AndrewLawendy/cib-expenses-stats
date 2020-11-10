@@ -1,15 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Route } from "wouter";
 
 import "semantic-ui-css/semantic.min.css";
+import styles from "./index.scss";
 
 import Nav from "./components/nav/Nav.jsx";
+import Home from "./components/home/Home.jsx";
+import Stats from "./components/stats/Stats.jsx";
 
 const App = () => {
   return (
-    <React.Fragment>
+    <div className={styles.appContainer}>
       <Nav />
-    </React.Fragment>
+
+      <div className={styles.body}>
+        <Route path="/" component={Home} />
+        <Route path="/stats" component={Stats} />
+      </div>
+    </div>
   );
 };
 
