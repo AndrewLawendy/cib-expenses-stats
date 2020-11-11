@@ -1,0 +1,22 @@
+.jsonDataText {
+  height: 100%;
+
+  .header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
+  form {
+    height: 100%;
+
+    textarea {
+      height: 50%;
+    }
+  }
+}

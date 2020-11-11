@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Button } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 import { SemanticFormikInputField } from "../semanticFormikInputField/SemanticFormikInputField.jsx";
 
@@ -24,38 +24,41 @@ const onSubmit = ({ month, year }) => {
 
 const GetDataForm = () => {
   return (
-    <Formik
-      enableReinitialize={true}
-      initialValues={initialValues}
-      validationSchema={validationScheme}
-      onSubmit={onSubmit}
-    >
-      {({ isValid }) => (
-        <Form>
-          <Field
-            name="month"
-            label="Month"
-            type="number"
-            min="1"
-            max="12"
-            component={SemanticFormikInputField}
-          />
+    <>
+      <Header as="h2">Get Function Form</Header>
+      <Formik
+        enableReinitialize={true}
+        initialValues={initialValues}
+        validationSchema={validationScheme}
+        onSubmit={onSubmit}
+      >
+        {({ isValid }) => (
+          <Form>
+            <Field
+              name="month"
+              label="Month"
+              type="number"
+              min="1"
+              max="12"
+              component={SemanticFormikInputField}
+            />
 
-          <Field
-            name="year"
-            label="Year"
-            type="number"
-            min="1990"
-            max="2120"
-            component={SemanticFormikInputField}
-          />
+            <Field
+              name="year"
+              label="Year"
+              type="number"
+              min="1990"
+              max="2120"
+              component={SemanticFormikInputField}
+            />
 
-          <Button type="submit" disabled={!isValid} primary>
-            Get Function
-          </Button>
-        </Form>
-      )}
-    </Formik>
+            <Button type="submit" disabled={!isValid} primary>
+              Get Function
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </>
   );
 };
 

@@ -1,17 +1,16 @@
 import React from "react";
-import { Grid, Form, TextArea } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 import styles from "./styles.scss";
 
+import JSONDataText from "../jsonDataText/JSONDataText";
 import GetDataForm from "../getDataForm/GetDataForm";
 
 const Home = () => {
   return (
     <Grid className={styles.grid}>
       <Grid.Column width={12}>
-        <Form>
-          <TextArea placeholder="Your credit card JSON" />
-        </Form>
+        <JSONDataText />
       </Grid.Column>
       <Grid.Column width={4}>
         <GetDataForm />
