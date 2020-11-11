@@ -11,14 +11,14 @@ import Stats from "./components/stats/Stats.jsx";
 
 const App = () => {
   return (
-    <div className={styles.appContainer}>
+    <>
       <Nav />
 
       <div className={styles.body}>
         <Route path="/" component={Home} />
         <Route path="/stats" component={Stats} />
       </div>
-    </div>
+    </>
   );
 };
 
