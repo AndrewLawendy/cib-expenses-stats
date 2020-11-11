@@ -5,6 +5,8 @@ import { Button } from "semantic-ui-react";
 
 import { SemanticFormikInputField } from "../semanticFormikInputField/SemanticFormikInputField.jsx";
 
+import { copyToClipboard, getDataFunction } from "../utils";
+
 const validationScheme = Yup.object().shape({
   month: Yup.number().min(1).max(12).required("Month is required"),
   year: Yup.number().min(1990).max(2120).required("Year field is required"),
@@ -15,11 +17,12 @@ const initialValues = {
   year: new Date().getFullYear(),
 };
 
-const GetDataForm = () => {
-  const onSubmit = () => {
-    console.log("submited");
-  };
+const onSubmit = ({ month, year }) => {
+  const functionString = getDataFunction(month, year);
+  copyToClipboard(functionString);
+};
 
+const GetDataForm = () => {
   return (
     <Formik
       enableReinitialize={true}
@@ -48,7 +51,7 @@ const GetDataForm = () => {
           />
 
           <Button type="submit" disabled={!isValid} primary>
-            Get Data
+            Get Function
           </Button>
         </Form>
       )}
