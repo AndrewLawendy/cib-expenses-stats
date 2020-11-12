@@ -1,6 +1,4 @@
 .jsonDataText {
-  height: 100%;
-
   .header {
     margin-bottom: 1rem;
     display: flex;
@@ -13,10 +11,8 @@
   }
 
   form {
-    height: 100%;
-
     textarea {
-      height: 50%;
+      height: 13rem;
     }
   }
 }

@@ -29,7 +29,7 @@ function getCreditTable (month, year){
       return {
           date : date.innerText.trim(),
           description: description.innerText.trim(),
-          amount: amount.innerText.trim().replace(',', ''),
+          amount: Number(amount.innerText.trim().replace(',', '')),
           debitOrCredit: debitOrCredit.innerText.trim()
       }
   }).toArray();
