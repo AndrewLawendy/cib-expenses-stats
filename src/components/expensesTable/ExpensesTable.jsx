@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Table } from "semantic-ui-react";
 
-import { AppContext } from "../appContext/AppContext";
+import { AppContext } from "../appContext/AppContext.jsx";
 
 const ExpensesTable = () => {
   const { jsonData } = useContext(AppContext);

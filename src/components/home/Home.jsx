@@ -1,9 +1,10 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
 
-import JSONDataText from "../jsonDataText/JSONDataText";
-import GetDataForm from "../getDataForm/GetDataForm";
-import ExpensesTable from "../expensesTable/ExpensesTable";
+import JSONDataText from "../jsonDataText/JSONDataText.jsx";
+import GetDataForm from "../getDataForm/GetDataForm.jsx";
+import ExpensesTable from "../expensesTable/ExpensesTable.jsx";
+import ExpensesChart from "../expensesChart/ExpensesChart.jsx";
 
 const Home = () => {
   return (
@@ -20,6 +21,9 @@ const Home = () => {
       <Grid>
         <Grid.Column width={8}>
           <ExpensesTable />
+        </Grid.Column>
+        <Grid.Column width={8}>
+          <ExpensesChart />
         </Grid.Column>
       </Grid>
     </>

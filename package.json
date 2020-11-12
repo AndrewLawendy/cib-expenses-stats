@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/AndrewLawendy/cib-credit-card-stats#readme",
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.10",
     "babel-plugin-react-css-modules": "^5.2.6",
     "formik": "^2.2.3",
     "node-sass": "^5.0.0",
