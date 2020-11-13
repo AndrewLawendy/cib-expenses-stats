@@ -40,6 +40,7 @@ const UserModal = () => {
       </Modal.Content>
       <Modal.Actions>
         <Button
+          disabled={!userState}
           content="Update"
           onClick={() => {
             setLocalStorageUser(userState);
