@@ -41,11 +41,7 @@ const ExpensesChart = () => {
     };
   }, [jsonData]);
 
-  return (
-    jsonData.length > 0 && (
-      <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
-    )
-  );
+  return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
 };
 
 export default ExpensesChart;

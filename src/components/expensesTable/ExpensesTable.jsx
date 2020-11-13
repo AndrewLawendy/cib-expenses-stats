@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
-import { Table } from "semantic-ui-react";
+import { Table, Pagination } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
+
+import styles from "./styles.scss";
 
 const ExpensesTable = () => {
   const { jsonData } = useContext(AppContext);
   const [sortingDirection, setSortingDirection] = useState(null);
   const [sortedData, setSortedData] = useState(jsonData);
+  const totalPages = Math.ceil(jsonData.length / 10);
+  const [startEndIndexes, setStartEndIndexes] = useState([1, 10]);
   const getSortingDirection = sortingDirection
     ? sortingDirection === "asc"
       ? "ascending"
@@ -33,8 +37,14 @@ const ExpensesTable = () => {
     setSortedData(sorted);
   }
 
+  function onPageChange(_, { activePage }) {
+    const startIndex = (activePage - 1) * 10;
+    const endIndex = startIndex + 10;
+    setStartEndIndexes([startIndex, endIndex]);
+  }
+
   return (
-    sortedData.length > 0 && (
+    <div className={styles.tableWrapper}>
       <Table sortable celled selectable striped fixed>
         <Table.Header>
           <Table.Row>
@@ -46,13 +56,15 @@ const ExpensesTable = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {sortedData.map(({ date, description, amount }, index) => (
-            <Table.Row key={`${description}-${index}`}>
-              <Table.Cell>{date}</Table.Cell>
-              <Table.Cell>{description}</Table.Cell>
-              <Table.Cell>{amount}</Table.Cell>
-            </Table.Row>
-          ))}
+          {sortedData
+            .slice(...startEndIndexes)
+            .map(({ date, description, amount }, index) => (
+              <Table.Row key={`${description}-${index}`}>
+                <Table.Cell>{date}</Table.Cell>
+                <Table.Cell>{description}</Table.Cell>
+                <Table.Cell>{amount}</Table.Cell>
+              </Table.Row>
+            ))}
         </Table.Body>
         <Table.Footer>
           <Table.Row>
@@ -61,7 +73,11 @@ const ExpensesTable = () => {
           </Table.Row>
         </Table.Footer>
       </Table>
-    )
+      <Pagination
+        totalPages={totalPages}
+        onPageChange={onPageChange}
+      ></Pagination>
+    </div>
   );
 };
 
