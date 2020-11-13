@@ -43,7 +43,11 @@ const JSONDataText = () => {
       <div className={styles.header}>
         <Header as="h2">JSON Data</Header>
         <div>
-          <Button color="green" onClick={generateDate}>
+          <Button
+            color="green"
+            onClick={generateDate}
+            disabled={!textAreaValue}
+          >
             Generate Data
           </Button>
           <Button
