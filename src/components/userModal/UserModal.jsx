@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Form } from "semantic-ui-react";
 
-import { AppContext } from "../appContext/AppContext.jsx";
+import { useUser } from "../../utils/localStorageHooks.js";
 
 const UserModal = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser } = useContext(AppContext);
+  const [user, setLocalStorageUser] = useUser();
   const [userState, setUserState] = useState(user);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const UserModal = () => {
         <Button
           content="Update"
           onClick={() => {
-            setUser(userState);
+            setLocalStorageUser(userState);
             setOpen(false);
           }}
           positive

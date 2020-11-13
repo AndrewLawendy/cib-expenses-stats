@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Form, TextArea, Header, Button } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
-import useCreditExpensesHistory from "../../utils/creditExpensesHistory.js";
+import { useCreditExpensesHistory } from "../../utils/localStorageHooks.js";
 
 import styles from "./styles.scss";
 

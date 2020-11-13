@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "wouter";
 import { Button, Header } from "semantic-ui-react";
 
 import styles from "./styles.scss";
 
-import { AppContext } from "../appContext/AppContext.jsx";
-
 import UserModal from "../userModal/UserModal.jsx";
+import { useUser } from "../../utils/localStorageHooks.js";
 
 const Nav = () => {
-  const { user } = useContext(AppContext);
+  const [user] = useUser();
   return (
     <nav className={styles.nav}>
       <Header className={styles.header}>{user}</Header>
