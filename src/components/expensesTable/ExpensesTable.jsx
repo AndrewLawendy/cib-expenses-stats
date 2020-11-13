@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Table, Pagination } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -9,8 +9,9 @@ const ExpensesTable = () => {
   const { jsonData } = useContext(AppContext);
   const [sortingDirection, setSortingDirection] = useState(null);
   const [sortedData, setSortedData] = useState(jsonData);
+  const [startEndIndexes, setStartEndIndexes] = useState([0, 10]);
+
   const totalPages = Math.ceil(jsonData.length / 10);
-  const [startEndIndexes, setStartEndIndexes] = useState([1, 10]);
   const getSortingDirection = sortingDirection
     ? sortingDirection === "asc"
       ? "ascending"
@@ -43,6 +44,11 @@ const ExpensesTable = () => {
     setStartEndIndexes([startIndex, endIndex]);
   }
 
+  useEffect(() => {
+    setSortedData(jsonData);
+    setStartEndIndexes([0, 10]);
+  }, [jsonData]);
+
   return (
     <div className={styles.tableWrapper}>
       <Table sortable celled selectable striped fixed>
@@ -69,7 +75,7 @@ const ExpensesTable = () => {
         <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan="2">Total Amount</Table.HeaderCell>
-            <Table.HeaderCell>{totalAmount}</Table.HeaderCell>
+            <Table.HeaderCell>{totalAmount.toFixed(2)}</Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
       </Table>

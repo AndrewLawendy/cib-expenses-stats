@@ -31,7 +31,7 @@ const JSONDataText = () => {
               }
             }}
           >
-            Generate Table
+            Generate Data
           </Button>
           <Button color="teal">Update History</Button>
         </div>
