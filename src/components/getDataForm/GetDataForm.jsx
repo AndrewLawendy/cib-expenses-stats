@@ -5,7 +5,7 @@ import { Button, Header } from "semantic-ui-react";
 
 import { SemanticFormikInputField } from "../semanticFormikInputField/SemanticFormikInputField.jsx";
 
-import { copyToClipboard, getDataFunction } from "../utils";
+import { copyToClipboard, getDataFunction } from "../../utils";
 
 const validationScheme = Yup.object().shape({
   month: Yup.number().min(1).max(12).required("Month is required"),

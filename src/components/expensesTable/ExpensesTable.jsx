@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Table, Pagination } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -43,11 +43,6 @@ const ExpensesTable = () => {
     const endIndex = startIndex + 10;
     setStartEndIndexes([startIndex, endIndex]);
   }
-
-  useEffect(() => {
-    setSortedData(jsonData);
-    setStartEndIndexes([0, 10]);
-  }, [jsonData]);
 
   return (
     <div className={styles.tableWrapper}>
