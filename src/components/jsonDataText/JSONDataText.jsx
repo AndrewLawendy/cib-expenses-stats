@@ -1,8 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Form, TextArea, Header, Button } from "semantic-ui-react";
+import { Form, TextArea, Header, Button, Modal } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
-import { useCreditExpensesHistory } from "../../utils/localStorageHooks.js";
+import {
+  useCreditExpensesHistory,
+  useUser,
+} from "../../utils/localStorageHooks.js";
 
 import styles from "./styles.scss";
 
@@ -13,6 +16,7 @@ const JSONDataText = () => {
     creditExpensesHistory,
     setCreditExpensesHistory,
   ] = useCreditExpensesHistory();
+  const [user] = useUser();
   const { jsonData, setJsonData } = useContext(AppContext);
 
   function generateDate() {
@@ -30,11 +34,16 @@ const JSONDataText = () => {
   }
 
   function updateHistory() {
+    const userHistory = creditExpensesHistory[user] || {};
     const [, month, year] = jsonData[0].date.split("/");
     const monthHistoryKey = `${month}-${year}`;
+
     setCreditExpensesHistory({
       ...creditExpensesHistory,
-      [monthHistoryKey]: jsonData,
+      [user]: {
+        ...userHistory,
+        [monthHistoryKey]: jsonData,
+      },
     });
   }
 
@@ -50,13 +59,25 @@ const JSONDataText = () => {
           >
             Generate Data
           </Button>
-          <Button
-            color="teal"
-            onClick={updateHistory}
-            disabled={jsonData.length === 0}
-          >
-            Update History
-          </Button>
+          <Modal
+            trigger={
+              <Button color="teal" disabled={jsonData.length === 0}>
+                Update History
+              </Button>
+            }
+            dimmer="blurring"
+            header="Are you sure?"
+            content={`Storing expenses history to user "${user}"?`}
+            actions={[
+              "No",
+              {
+                key: "yes",
+                content: "Yes",
+                positive: true,
+                onClick: updateHistory,
+              },
+            ]}
+          />
         </div>
       </div>
       <Form>
