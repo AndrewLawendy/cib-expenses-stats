@@ -10,6 +10,7 @@ const ExpensesTable = () => {
   const [sortingDirection, setSortingDirection] = useState(null);
   const [filteredData, setFilteredData] = useState(jsonData);
   const [startEndIndexes, setStartEndIndexes] = useState([0, 10]);
+  const [activePage, setActivePage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
 
   const totalPages = Math.ceil(filteredData.length / 10);
@@ -43,9 +44,12 @@ const ExpensesTable = () => {
     const startIndex = (activePage - 1) * 10;
     const endIndex = startIndex + 10;
     setStartEndIndexes([startIndex, endIndex]);
+    setActivePage(activePage);
   }
 
   function handleSearchChange(_, { value }) {
+    setActivePage(1);
+    setStartEndIndexes([0, 10]);
     setSearchValue(value);
 
     const regex = new RegExp(value, "gi");
@@ -94,6 +98,7 @@ const ExpensesTable = () => {
           </Table.Footer>
         </Table>
         <Pagination
+          activePage={activePage}
           totalPages={totalPages}
           onPageChange={onPageChange}
         ></Pagination>
