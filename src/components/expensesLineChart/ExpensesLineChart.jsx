@@ -5,6 +5,8 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 import { Header, Statistic } from "semantic-ui-react";
 
+import styles from "./styles.scss";
+
 am4core.useTheme(am4themes_animated);
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -91,11 +93,11 @@ const ExpensesLineChart = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.summary}>
         <Header as="h3">Expenses Summary</Header>
         <Statistic.Group>
           <Statistic color="green">
-            <Statistic.Label>No Expenses Day</Statistic.Label>
+            <Statistic.Label>No Expenses Days</Statistic.Label>
             <Statistic.Value>
               {daysExpensesSummary.noExpensesDays}
             </Statistic.Value>
