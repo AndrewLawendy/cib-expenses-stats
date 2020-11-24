@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, TextArea, Header, Button, Modal } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -18,6 +18,13 @@ const JSONDataText = () => {
   ] = useCreditExpensesHistory();
   const [user] = useUser();
   const { jsonData, setJsonData } = useContext(AppContext);
+
+  useEffect(
+    () => () => {
+      setJsonData([]);
+    },
+    []
+  );
 
   function generateDate() {
     let jsonData = [];
