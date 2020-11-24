@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Table, Pagination } from "semantic-ui-react";
+import { Input, Table, Pagination } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
 
@@ -8,16 +8,17 @@ import styles from "./styles.scss";
 const ExpensesTable = () => {
   const { jsonData } = useContext(AppContext);
   const [sortingDirection, setSortingDirection] = useState(null);
-  const [sortedData, setSortedData] = useState(jsonData);
+  const [filteredData, setFilteredData] = useState(jsonData);
   const [startEndIndexes, setStartEndIndexes] = useState([0, 10]);
+  const [searchValue, setSearchValue] = useState("");
 
-  const totalPages = Math.ceil(jsonData.length / 10);
+  const totalPages = Math.ceil(filteredData.length / 10);
   const getSortingDirection = sortingDirection
     ? sortingDirection === "asc"
       ? "ascending"
       : "descending"
     : null;
-  const totalAmount = jsonData.reduce((total, { amount }) => {
+  const totalAmount = filteredData.reduce((total, { amount }) => {
     total += amount;
     return total;
   }, 0);
@@ -26,16 +27,16 @@ const ExpensesTable = () => {
     let sorted = [];
     if (!sortingDirection || sortingDirection === "asc") {
       setSortingDirection("desc");
-      sorted = sortedData.sort(
+      sorted = filteredData.sort(
         ({ amount: amountA }, { amount: amountB }) => amountB - amountA
       );
     } else {
       setSortingDirection("asc");
-      sorted = sortedData.sort(
+      sorted = filteredData.sort(
         ({ amount: amountA }, { amount: amountB }) => amountA - amountB
       );
     }
-    setSortedData(sorted);
+    setFilteredData(sorted);
   }
 
   function onPageChange(_, { activePage }) {
@@ -44,41 +45,60 @@ const ExpensesTable = () => {
     setStartEndIndexes([startIndex, endIndex]);
   }
 
+  function handleSearchChange(_, { value }) {
+    setSearchValue(value);
+
+    const regex = new RegExp(value, "gi");
+    const results = jsonData.filter(({ description }) =>
+      description.match(regex)
+    );
+
+    setFilteredData(results);
+  }
+
   return (
-    <div className={styles.tableWrapper}>
-      <Table sortable celled selectable striped fixed>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Date</Table.HeaderCell>
-            <Table.HeaderCell>Description</Table.HeaderCell>
-            <Table.HeaderCell sorted={getSortingDirection} onClick={sort}>
-              Amount
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {sortedData
-            .slice(...startEndIndexes)
-            .map(({ date, description, amount }, index) => (
-              <Table.Row key={`${description}-${index}`}>
-                <Table.Cell>{date}</Table.Cell>
-                <Table.Cell>{description}</Table.Cell>
-                <Table.Cell>{amount}</Table.Cell>
-              </Table.Row>
-            ))}
-        </Table.Body>
-        <Table.Footer>
-          <Table.Row>
-            <Table.HeaderCell colSpan="2">Total Amount</Table.HeaderCell>
-            <Table.HeaderCell>{totalAmount.toFixed(2)}</Table.HeaderCell>
-          </Table.Row>
-        </Table.Footer>
-      </Table>
-      <Pagination
-        totalPages={totalPages}
-        onPageChange={onPageChange}
-      ></Pagination>
-    </div>
+    <>
+      <Input
+        placeholder="Search..."
+        onChange={handleSearchChange}
+        value={searchValue}
+        icon="search"
+      />
+      <div className={styles.tableWrapper}>
+        <Table sortable celled selectable striped fixed>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Date</Table.HeaderCell>
+              <Table.HeaderCell>Description</Table.HeaderCell>
+              <Table.HeaderCell sorted={getSortingDirection} onClick={sort}>
+                Amount
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {filteredData
+              .slice(...startEndIndexes)
+              .map(({ date, description, amount }, index) => (
+                <Table.Row key={`${description}-${index}`}>
+                  <Table.Cell>{date}</Table.Cell>
+                  <Table.Cell>{description}</Table.Cell>
+                  <Table.Cell>{amount}</Table.Cell>
+                </Table.Row>
+              ))}
+          </Table.Body>
+          <Table.Footer>
+            <Table.Row>
+              <Table.HeaderCell colSpan="2">Total Amount</Table.HeaderCell>
+              <Table.HeaderCell>{totalAmount.toFixed(2)}</Table.HeaderCell>
+            </Table.Row>
+          </Table.Footer>
+        </Table>
+        <Pagination
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        ></Pagination>
+      </div>
+    </>
   );
 };
 
