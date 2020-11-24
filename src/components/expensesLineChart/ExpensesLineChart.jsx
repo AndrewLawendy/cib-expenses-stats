@@ -3,6 +3,8 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+import { Header, Statistic } from "semantic-ui-react";
+
 am4core.useTheme(am4themes_animated);
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -33,6 +35,28 @@ const ExpensesLineChart = () => {
 
     return { date, amount, description };
   });
+
+  const daysExpensesSummary = chartData.reduce(
+    (acc, { amount }) => {
+      if (amount == 0) {
+        acc.noExpensesDays++;
+      } else if (amount <= 50) {
+        acc.daysUnderFifty++;
+      } else if (amount <= 200) {
+        acc.daysUnderTwoHundreds++;
+      } else {
+        acc.daysOverTwoHundreds++;
+      }
+
+      return acc;
+    },
+    {
+      noExpensesDays: 0,
+      daysUnderFifty: 0,
+      daysUnderTwoHundreds: 0,
+      daysOverTwoHundreds: 0,
+    }
+  );
 
   useLayoutEffect(() => {
     const chart = am4core.create("lineChartDiv", am4charts.XYChart);
@@ -66,7 +90,41 @@ const ExpensesLineChart = () => {
   }, [jsonData]);
 
   return (
-    <div id="lineChartDiv" style={{ width: "100%", height: "500px" }}></div>
+    <>
+      <div>
+        <Header as="h3">Expenses Summary</Header>
+        <Statistic.Group>
+          <Statistic color="green">
+            <Statistic.Label>No Expenses Day</Statistic.Label>
+            <Statistic.Value>
+              {daysExpensesSummary.noExpensesDays}
+            </Statistic.Value>
+          </Statistic>
+
+          <Statistic color="olive">
+            <Statistic.Label>Days Under 50</Statistic.Label>
+            <Statistic.Value>
+              {daysExpensesSummary.daysUnderFifty}
+            </Statistic.Value>
+          </Statistic>
+
+          <Statistic color="orange">
+            <Statistic.Label>Days under 200</Statistic.Label>
+            <Statistic.Value>
+              {daysExpensesSummary.daysUnderTwoHundreds}
+            </Statistic.Value>
+          </Statistic>
+
+          <Statistic color="red">
+            <Statistic.Label>Days over 200</Statistic.Label>
+            <Statistic.Value>
+              {daysExpensesSummary.daysOverTwoHundreds}
+            </Statistic.Value>
+          </Statistic>
+        </Statistic.Group>
+      </div>
+      <div id="lineChartDiv" style={{ width: "100%", height: "500px" }}></div>
+    </>
   );
 };
 
