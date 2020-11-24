@@ -7,7 +7,7 @@ am4core.useTheme(am4themes_animated);
 
 import { AppContext } from "../appContext/AppContext.jsx";
 
-const ExpensesChart = () => {
+const ExpensesPieChart = () => {
   const { jsonData } = useContext(AppContext);
   const summedDescription = jsonData.reduce((acc, { description, amount }) => {
     if (!acc[description]) acc[description] = 0;
@@ -44,4 +44,4 @@ const ExpensesChart = () => {
   return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
 };
 
-export default ExpensesChart;
+export default ExpensesPieChart;
