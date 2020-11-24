@@ -20,7 +20,7 @@ const ExpensesPieChart = () => {
   }));
 
   useLayoutEffect(() => {
-    const chart = am4core.create("chartdiv", am4charts.PieChart);
+    const chart = am4core.create("pieChartDiv", am4charts.PieChart);
 
     chart.data = pieData;
 
@@ -41,7 +41,9 @@ const ExpensesPieChart = () => {
     };
   }, [jsonData]);
 
-  return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
+  return (
+    <div id="pieChartDiv" style={{ width: "100%", height: "500px" }}></div>
+  );
 };
 
 export default ExpensesPieChart;

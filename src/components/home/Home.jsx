@@ -7,6 +7,7 @@ import JSONDataText from "../jsonDataText/JSONDataText.jsx";
 import GetDataForm from "../getDataForm/GetDataForm.jsx";
 import ExpensesTable from "../expensesTable/ExpensesTable.jsx";
 import ExpensesPieChart from "../expensesPieChart/ExpensesPieChart.jsx";
+import ExpensesLineChart from "../expensesLineChart/ExpensesLineChart.jsx";
 
 const Home = () => {
   const { jsonData } = useContext(AppContext);
@@ -29,6 +30,7 @@ const Home = () => {
           <Grid.Column width={8}>
             <ExpensesPieChart />
           </Grid.Column>
+          <ExpensesLineChart />
         </Grid>
       )}
     </>
