@@ -85,10 +85,6 @@ const ExpensesLineChart = () => {
 
     //chart.scrollbarY = new am4core.Scrollbar();
     chart.scrollbarX = new am4core.Scrollbar();
-
-    return () => {
-      chart.dispose();
-    };
   }, [jsonData]);
 
   return (

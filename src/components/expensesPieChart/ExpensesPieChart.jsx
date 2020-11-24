@@ -35,10 +35,6 @@ const ExpensesPieChart = () => {
     pieSeries.hiddenState.properties.opacity = 1;
     pieSeries.hiddenState.properties.endAngle = -90;
     pieSeries.hiddenState.properties.startAngle = -90;
-
-    return () => {
-      chart.dispose();
-    };
   }, [jsonData]);
 
   return (
