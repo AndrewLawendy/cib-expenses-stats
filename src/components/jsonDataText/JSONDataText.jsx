@@ -44,12 +44,16 @@ const JSONDataText = () => {
     const userHistory = creditExpensesHistory[user] || {};
     const [, month, year] = jsonData[0].date.split("/");
     const monthHistoryKey = `${month}-${year}`;
+    const total = jsonData.reduce((acc, { amount }) => {
+      acc += amount;
+      return acc;
+    }, 0);
 
     setCreditExpensesHistory({
       ...creditExpensesHistory,
       [user]: {
         ...userHistory,
-        [monthHistoryKey]: jsonData,
+        [monthHistoryKey]: { total, data: jsonData },
       },
     });
   }
