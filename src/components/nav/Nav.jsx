@@ -16,7 +16,7 @@ const Nav = () => {
         <Link href="/">
           <Button content="Home" icon="home" labelPosition="left" primary />
         </Link>
-        <Link href="stats">
+        <Link href="expenses-history">
           <Button
             content="Expenses History"
             icon="chart line"

@@ -8,7 +8,7 @@ import styles from "./index.scss";
 import AppContextProvider from "./components/appContextProvider/AppContextProvider.jsx";
 import Nav from "./components/nav/Nav.jsx";
 import Home from "./components/home/Home.jsx";
-import Stats from "./components/stats/Stats.jsx";
+import ExpensesHistory from "./components/expensesHistory/ExpensesHistory.jsx";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
 
       <div className={styles.body}>
         <Route path="/" component={Home} />
-        <Route path="/stats" component={Stats} />
+        <Route path="/expenses-history" component={ExpensesHistory} />
       </div>
     </AppContextProvider>
   );
