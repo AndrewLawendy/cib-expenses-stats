@@ -103,7 +103,7 @@ const ExpensesLineChart = () => {
             </Statistic.Value>
           </Statistic>
 
-          <Statistic color="olive">
+          <Statistic color="yellow">
             <Statistic.Label>Days Under 50</Statistic.Label>
             <Statistic.Value>
               {daysExpensesSummary.daysUnderFifty}
