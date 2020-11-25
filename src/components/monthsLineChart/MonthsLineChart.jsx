@@ -3,17 +3,9 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-import {
-  useCreditExpensesHistory,
-  useUser,
-} from "../../utils/localStorageHooks.js";
-
 am4core.useTheme(am4themes_animated);
 
-const MonthsLineChart = () => {
-  const [creditExpensesHistory] = useCreditExpensesHistory();
-  const [user] = useUser();
-  const userHistory = creditExpensesHistory[user];
+const MonthsLineChart = ({ userHistory }) => {
   const date = new Date();
   const data = Array.from({ length: 12 }, (_, i) => {
     const year = date.getUTCFullYear();

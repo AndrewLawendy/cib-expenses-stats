@@ -1,16 +1,25 @@
 import React from "react";
 import { Header, Grid } from "semantic-ui-react";
 
+import {
+  useCreditExpensesHistory,
+  useUser,
+} from "../../utils/localStorageHooks.js";
+
 import MonthsLineChart from "../monthsLineChart/MonthsLineChart.jsx";
 import OneMonthStats from "../oneMonthStats/OneMonthStats.jsx";
 
 const ExpensesHistory = () => {
+  const [creditExpensesHistory] = useCreditExpensesHistory();
+  const [user] = useUser();
+  const userHistory = creditExpensesHistory[user];
+
   return (
     <>
       <Header as="h2">Expenses History</Header>
       <Grid>
         <Grid.Column width={12}>
-          <MonthsLineChart />
+          <MonthsLineChart userHistory={userHistory} />
         </Grid.Column>
         <Grid.Column width={4}>Months</Grid.Column>
       </Grid>
