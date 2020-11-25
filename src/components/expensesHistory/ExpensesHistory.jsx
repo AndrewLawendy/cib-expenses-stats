@@ -7,6 +7,7 @@ import {
 } from "../../utils/localStorageHooks.js";
 
 import MonthsLineChart from "../monthsLineChart/MonthsLineChart.jsx";
+import ChooseMonthHistory from "../chooseMonthHistory/ChooseMonthHistory.jsx";
 import OneMonthStats from "../oneMonthStats/OneMonthStats.jsx";
 
 const ExpensesHistory = () => {
@@ -21,7 +22,9 @@ const ExpensesHistory = () => {
         <Grid.Column width={12}>
           <MonthsLineChart userHistory={userHistory} />
         </Grid.Column>
-        <Grid.Column width={4}>Months</Grid.Column>
+        <Grid.Column width={4}>
+          <ChooseMonthHistory userHistory={userHistory} />
+        </Grid.Column>
       </Grid>
       <OneMonthStats />
     </>
