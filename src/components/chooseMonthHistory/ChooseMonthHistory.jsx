@@ -53,7 +53,7 @@ const ChooseMonthHistory = ({ userHistory }) => {
 
   function passMonthData() {
     const key = `${month}-${year}`;
-    const { data } = userHistory[key];
+    const { data } = userHistory[key] || { data: [] };
 
     setJsonData(data);
   }
