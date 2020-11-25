@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Input, Table, Pagination } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -48,8 +48,7 @@ const ExpensesTable = () => {
   }
 
   function handleSearchChange(_, { value }) {
-    setActivePage(1);
-    setStartEndIndexes([0, 10]);
+    resetData();
     setSearchValue(value);
 
     const regex = new RegExp(value, "gi");
@@ -59,6 +58,17 @@ const ExpensesTable = () => {
 
     setFilteredData(results);
   }
+
+  function resetData() {
+    setActivePage(1);
+    setStartEndIndexes([0, 10]);
+  }
+
+  useEffect(() => {
+    resetData();
+    setSearchValue("");
+    setFilteredData(jsonData);
+  }, [jsonData]);
 
   return (
     <>
