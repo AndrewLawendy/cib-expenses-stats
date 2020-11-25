@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Button } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -57,6 +57,13 @@ const ChooseMonthHistory = ({ userHistory }) => {
 
     setJsonData(data);
   }
+
+  useEffect(
+    () => () => {
+      setJsonData([]);
+    },
+    []
+  );
 
   return (
     <>
