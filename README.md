@@ -9,6 +9,8 @@ You expenses are displayed through 3 views:
 
 You can check the demo by clicking the link [CIB Expenses Stats](https://cib-credit-card-stats.netlify.app/)
 
+![Demo](demo/cib-expenses.gif)
+
 # Stack
 
 - Library: ReactJs
