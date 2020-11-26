@@ -1,6 +1,7 @@
 # CIB Expenses Stats
 
-This app aims to give a better view on your CIB credit card expenses each month.
+This app aims to give a better view on your CIB credit card expenses each month or you can update each month in your local storage and quickly check them and compare your progress between months.
+
 You expenses are displayed through 3 views:
 
 - Table (The amount is sortable and can be filtered by expense description)
@@ -19,6 +20,7 @@ You can check the demo by clicking the link [CIB Expenses Stats](https://cib-cre
 - UI Framework: [Semantic UI React](https://react.semantic-ui.com/)
 - Formik
 - Yup
+- [@amcharts/amcharts4](https://www.amcharts.com/demos/)
 - use-local-storage-state
 - Linter: ESLint
 - Formatter: Prettier
