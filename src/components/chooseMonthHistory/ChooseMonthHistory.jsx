@@ -31,24 +31,24 @@ const ChooseMonthHistory = ({ userHistory }) => {
   }));
 
   function getYears(userHistory) {
-    let lastYear = "";
-    const differentYears = [];
+    const uniqueYears = [];
 
     for (const key in userHistory) {
       if (userHistory.hasOwnProperty(key)) {
         const [, year] = key.split("-");
-        if (lastYear !== year) {
-          differentYears.push({
+        if (!uniqueYears.some(({ value }) => value === year)) {
+          uniqueYears.push({
             key: year,
             text: year,
             value: year,
           });
-          lastYear = year;
         }
       }
     }
 
-    return differentYears;
+    return uniqueYears.sort(
+      ({ value: valueA }, { value: valueB }) => valueA - valueB
+    );
   }
 
   function passMonthData() {
