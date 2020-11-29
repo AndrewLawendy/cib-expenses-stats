@@ -12,7 +12,14 @@ const Home = () => {
       menuItem: "JSON (Credit Only)",
       render: () => (
         <Tab.Pane>
-          <JSONDataText />
+          <Grid>
+            <Grid.Column width={12}>
+              <JSONDataText />
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <GetDataForm />
+            </Grid.Column>
+          </Grid>
         </Tab.Pane>
       ),
     },
@@ -27,14 +34,7 @@ const Home = () => {
   ];
   return (
     <>
-      <Grid>
-        <Grid.Column width={12}>
-          <Tab panes={panes} />
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <GetDataForm />
-        </Grid.Column>
-      </Grid>
+      <Tab panes={panes} />
       <OneMonthStats />
     </>
   );
