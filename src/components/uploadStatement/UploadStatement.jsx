@@ -34,7 +34,7 @@ const UploadStatement = () => {
         return {
           date: constructDateOutOfXls(date),
           description,
-          amount: amount && amount.replace(",", "") && Number(amount),
+          amount: amount && Number(amount.replace(",", "")),
         };
       })
       .filter(({ date, description, amount }) => date && description && amount);
