@@ -28,6 +28,7 @@
     "postcss-scss": "^3.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-dropzone": "^11.2.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.1",
     "use-local-storage-state": "^6.0.0",
