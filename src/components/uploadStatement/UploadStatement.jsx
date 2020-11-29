@@ -32,7 +32,7 @@ const UploadStatement = () => {
     return data
       .map(({ C: date, J: description, S: amount }) => {
         return {
-          date: constructDateOutOfXls(date),
+          date: date && constructDateOutOfXls(date),
           description,
           amount: amount && Number(amount.replace(",", "")),
         };
