@@ -42,3 +42,31 @@ function getCreditTable (month, year){
   copyToClipboard(JSON.stringify(monthFilteredData))
 }
 getCreditTable(${month}, ${year})`;
+
+export const constructDateOutOfXls = (date) => {
+  let constructedDate;
+
+  if (date) {
+    const months = {
+      JAN: 1,
+      FEB: 2,
+      MAR: 3,
+      APR: 4,
+      MAY: 5,
+      JUN: 6,
+      JUL: 7,
+      AUG: 8,
+      SEP: 9,
+      OCT: 10,
+      NOV: 11,
+      DEC: 12,
+    };
+    const day = date.slice(0, 2);
+    const month = months[date.slice(2, 5)];
+    const year = `20${date.slice(-2)}`;
+
+    constructedDate = `${day}/${month}/${year}`;
+  }
+
+  return constructedDate;
+};

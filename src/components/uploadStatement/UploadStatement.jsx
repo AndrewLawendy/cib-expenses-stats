@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import excelToJson from "convert-excel-to-json";
 import { encode } from "base64-arraybuffer";
 
 import styles from "./styles.scss";
 
+import { AppContext } from "../appContext/AppContext.jsx";
+import { constructDateOutOfXls } from "../../utils";
+
 const UploadStatement = () => {
+  const { setJsonData } = useContext(AppContext);
   const { getRootProps, getInputProps } = useDropzone({
     accept: ".xls",
     multiple: false,
@@ -15,12 +19,25 @@ const UploadStatement = () => {
   function handleFileDropped([statementFile]) {
     const reader = new FileReader();
     reader.onload = ({ target: { result } }) => {
-      const { Sheet1 } = excelToJson({
+      const { Sheet1: data } = excelToJson({
         source: encode(result),
       });
-      console.log(Sheet1);
+      const jsonData = constructJsonScheme(data);
+      setJsonData(jsonData);
     };
     reader.readAsArrayBuffer(statementFile);
+  }
+
+  function constructJsonScheme(data) {
+    return data
+      .map(({ C: date, J: description, S: amount }) => {
+        return {
+          date: constructDateOutOfXls(date),
+          description,
+          amount: amount && amount.replace(",", "") && Number(amount),
+        };
+      })
+      .filter(({ date, description, amount }) => date && description && amount);
   }
 
   return (
