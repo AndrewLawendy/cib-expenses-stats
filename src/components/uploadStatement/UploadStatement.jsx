@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import excelToJson from "convert-excel-to-json";
 import { encode } from "base64-arraybuffer";
@@ -39,6 +39,13 @@ const UploadStatement = () => {
       })
       .filter(({ date, description, amount }) => date && description && amount);
   }
+
+  useEffect(
+    () => () => {
+      setJsonData([]);
+    },
+    []
+  );
 
   return (
     <div {...getRootProps({ className: styles.dropZone })}>
