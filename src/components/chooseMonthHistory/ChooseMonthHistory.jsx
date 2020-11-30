@@ -3,10 +3,10 @@ import { Form, Button } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
 
-const ChooseMonthHistory = ({ userHistory, type, setType }) => {
-  const date = new Date();
-  const [month, setMonth] = useState(date.getMonth() + 1);
-  const [year, setYear] = useState(date.getFullYear().toString());
+const ChooseMonthHistory = ({
+  userHistory,
+  formControl: { type, setType, month, setMonth, year, setYear },
+}) => {
   const { setMonthData } = useContext(AppContext);
 
   const typesOptions = [

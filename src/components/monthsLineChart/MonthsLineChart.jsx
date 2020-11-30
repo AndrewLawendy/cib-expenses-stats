@@ -5,14 +5,13 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 am4core.useTheme(am4themes_animated);
 
-const MonthsLineChart = ({ userHistory }) => {
-  const date = new Date();
+const MonthsLineChart = ({ userHistory, year }) => {
   const data = Array.from({ length: 12 }, (_, i) => {
-    const year = date.getUTCFullYear();
-    const historyKey = `${i + 1}-${year}`;
+    const chosenYear = year;
+    const historyKey = `${i + 1}-${chosenYear}`;
     const { total } = userHistory[historyKey] || { total: 0 };
 
-    return { date: new Date(year, i), total };
+    return { date: new Date(chosenYear, i), total };
   });
 
   useLayoutEffect(() => {
@@ -40,7 +39,7 @@ const MonthsLineChart = ({ userHistory }) => {
 
     //chart.scrollbarY = new am4core.Scrollbar();
     chart.scrollbarX = new am4core.Scrollbar();
-  }, [userHistory]);
+  }, [userHistory, year]);
 
   return (
     <div
