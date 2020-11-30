@@ -1,23 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Form, TextArea, Header, Button, Modal } from "semantic-ui-react";
+import { Form, TextArea, Header, Button } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
-import {
-  useCreditExpensesHistory,
-  useUser,
-} from "../../utils/localStorageHooks.js";
+import UpdateHistory from "../updateHistory/UpdateHistory.jsx";
 
 import styles from "./styles.scss";
 
 const JSONDataText = () => {
   const [jsonInvalid, setJsonInvalid] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState("");
-  const [
-    creditExpensesHistory,
-    setCreditExpensesHistory,
-  ] = useCreditExpensesHistory();
-  const [user] = useUser();
-  const { jsonData, setJsonData } = useContext(AppContext);
+  const { setJsonData } = useContext(AppContext);
 
   useEffect(
     () => () => {
@@ -40,24 +32,6 @@ const JSONDataText = () => {
     }
   }
 
-  function updateHistory() {
-    const userHistory = creditExpensesHistory[user] || {};
-    const [, month, year] = jsonData[0].date.split("/");
-    const monthHistoryKey = `${month}-${year}`;
-    const total = jsonData.reduce((acc, { amount }) => {
-      acc += amount;
-      return acc;
-    }, 0);
-
-    setCreditExpensesHistory({
-      ...creditExpensesHistory,
-      [user]: {
-        ...userHistory,
-        [monthHistoryKey]: { total, data: jsonData },
-      },
-    });
-  }
-
   return (
     <div className={styles.jsonDataText}>
       <div className={styles.header}>
@@ -70,25 +44,7 @@ const JSONDataText = () => {
           >
             Generate Data
           </Button>
-          <Modal
-            trigger={
-              <Button color="teal" disabled={jsonData.length === 0}>
-                Update History
-              </Button>
-            }
-            dimmer="blurring"
-            header="Are you sure?"
-            content={`Storing expenses history to user "${user}"?`}
-            actions={[
-              "No",
-              {
-                key: "yes",
-                content: "Yes",
-                positive: true,
-                onClick: updateHistory,
-              },
-            ]}
-          />
+          <UpdateHistory />
         </div>
       </div>
       <Form>
