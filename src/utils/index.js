@@ -23,7 +23,7 @@ export const getDataFunction = (month, year) => `function copyToClipboard(str) {
 };
 
 function getCreditTable (month, year){
-  const jsonData = $('[ng-repeat*="txn in creditCardTransactions"]').map((_, row) => {
+  const monthData = $('.acc_item_active + div [ng-repeat*="txn in creditCardTransactions"]').map((_, row) => {
       var cells = $(row).find('.tbl-cell').toArray();
       var [date, description, amount, debitOrCredit] = cells;
       return {
@@ -34,12 +34,16 @@ function getCreditTable (month, year){
       }
   }).toArray();
 
-  const monthFilteredData = jsonData.filter(row => {
+  const jsonData = monthData.filter(row => {
       const [, rowMonth, rowYear] = row.date.split('/');
       return rowMonth == month && rowYear == year && row.debitOrCredit !== 'Credit'
   });
 
-  copyToClipboard(JSON.stringify(monthFilteredData))
+  const accountKey = $('.acc_item_active .acc_name .acc_label').text();
+
+  copyToClipboard(JSON.stringify({ accountKey, jsonData}));
+
+  alert('Data for card '+ accountKey + ' are copied successfully.\\nPast them in the JSON Data field!')
 }
 getCreditTable(${month}, ${year})`;
 

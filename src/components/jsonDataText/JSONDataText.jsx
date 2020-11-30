@@ -19,16 +19,15 @@ const JSONDataText = () => {
   );
 
   function generateDate() {
-    let jsonData = [];
     if (textAreaValue) {
       try {
-        jsonData = JSON.parse(textAreaValue);
-        setMonthData({ type: "credit", jsonData });
+        const { accountKey, jsonData } = JSON.parse(textAreaValue);
+        setMonthData({ type: "credit", accountKey, jsonData });
       } catch {
         setJsonInvalid(true);
       }
     } else {
-      setMonthData({ type: "credit", jsonData });
+      setMonthData({ type: "credit", accountKey: "", jsonData: [] });
     }
   }
 
