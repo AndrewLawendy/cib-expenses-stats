@@ -8,7 +8,7 @@ You expenses are displayed through 3 views:
 - Pie Chart (A comparison between different expenses and its percentages)
 - Line Chart (A daily expenses graph with details of each day, along with the number of days of no expenses, expenses under 50, expenses under 200 and expenses over 200)
 
-You can check the demo by clicking the link [CIB Expenses Stats](https://cib-credit-card-stats.netlify.app/)
+You can check the demo by clicking the link [CIB Expenses Stats](https://cib-expenses-stats.netlify.app/)
 
 ![Demo](assets/demo/cib-expenses.gif)
 
