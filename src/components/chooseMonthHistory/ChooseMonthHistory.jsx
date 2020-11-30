@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Form, Button } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
@@ -35,7 +35,7 @@ const ChooseMonthHistory = ({
     "November",
     "December",
   ];
-  const yearsOptions = getYears(userHistory);
+  const yearsOptions = userHistory && getYears(userHistory);
   const monthsOptions = Array.from({ length: 12 }, (_, i) => ({
     key: months[i],
     text: months[i],
@@ -93,37 +93,42 @@ const ChooseMonthHistory = ({
           />
         </Form.Field>
 
-        <Form.Field>
-          <Form.Select
-            search
-            fluid
-            label="Month"
-            options={monthsOptions}
-            value={month}
-            onChange={(_, { value }) => {
-              setMonth(value);
-            }}
-          />
-        </Form.Field>
+        {userHistory && (
+          <>
+            <Form.Field>
+              <Form.Select
+                search
+                fluid
+                label="Month"
+                options={monthsOptions}
+                value={month}
+                onChange={(_, { value }) => {
+                  setMonth(value);
+                }}
+              />
+            </Form.Field>
 
-        <Form.Field>
-          <Form.Select
-            search
-            fluid
-            label="Year"
-            options={yearsOptions}
-            value={year}
-            onChange={(_, { value }) => {
-              setYear(value);
-            }}
-          />
-        </Form.Field>
-        <Form.Field
-          control={Button}
-          content="Choose Month"
-          primary
-          onClick={passMonthData}
-        />
+            <Form.Field>
+              <Form.Select
+                search
+                fluid
+                label="Year"
+                options={yearsOptions}
+                value={year}
+                onChange={(_, { value }) => {
+                  setYear(value);
+                }}
+              />
+            </Form.Field>
+
+            <Form.Field
+              control={Button}
+              content="Choose Month"
+              primary
+              onClick={passMonthData}
+            />
+          </>
+        )}
       </Form>
     </>
   );

@@ -24,27 +24,28 @@ const ExpensesHistory = () => {
   return (
     <>
       <Header as="h2">Expenses History</Header>
-      {userHistory ? (
-        <>
-          <Grid>
-            <Grid.Column width={12}>
-              <MonthsLineChart userHistory={userHistory} year={year} />
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <ChooseMonthHistory
-                userHistory={userHistory}
-                formControl={{ type, setType, month, setMonth, year, setYear }}
-              />
-            </Grid.Column>
-          </Grid>
-          <OneMonthStats />
-        </>
-      ) : (
-        <Message info>
-          <Message.Header>No expenses history found!</Message.Header>
-          <p>Did you update the history for user {user}?</p>
-        </Message>
-      )}
+      <Grid>
+        <Grid.Column width={12}>
+          {userHistory ? (
+            <MonthsLineChart userHistory={userHistory} year={year} />
+          ) : (
+            <Message info>
+              <Message.Header>No expenses history found!</Message.Header>
+              <p>
+                Did you update the history of user {user} for the {type}{" "}
+                category?
+              </p>
+            </Message>
+          )}
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <ChooseMonthHistory
+            userHistory={userHistory}
+            formControl={{ type, setType, month, setMonth, year, setYear }}
+          />
+        </Grid.Column>
+      </Grid>
+      <OneMonthStats />
     </>
   );
 };
