@@ -40,7 +40,7 @@ const MonthsLineChart = ({ userHistory }) => {
 
     //chart.scrollbarY = new am4core.Scrollbar();
     chart.scrollbarX = new am4core.Scrollbar();
-  }, []);
+  }, [userHistory]);
 
   return (
     <div

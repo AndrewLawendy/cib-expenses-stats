@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header, Grid, Message } from "semantic-ui-react";
 
 import {
@@ -11,9 +11,11 @@ import ChooseMonthHistory from "../chooseMonthHistory/ChooseMonthHistory.jsx";
 import OneMonthStats from "../oneMonthStats/OneMonthStats.jsx";
 
 const ExpensesHistory = () => {
+  const [type, setType] = useState("credit");
   const [creditExpensesHistory] = useCreditExpensesHistory();
   const [user] = useUser();
-  const userHistory = creditExpensesHistory[user];
+  const allUserHistory = creditExpensesHistory[user] || {};
+  const userHistory = allUserHistory[type];
 
   return (
     <>
@@ -25,7 +27,11 @@ const ExpensesHistory = () => {
               <MonthsLineChart userHistory={userHistory} />
             </Grid.Column>
             <Grid.Column width={4}>
-              <ChooseMonthHistory userHistory={userHistory} />
+              <ChooseMonthHistory
+                userHistory={userHistory}
+                type={type}
+                setType={setType}
+              />
             </Grid.Column>
           </Grid>
           <OneMonthStats />

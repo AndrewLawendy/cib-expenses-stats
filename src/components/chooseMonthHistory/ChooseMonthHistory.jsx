@@ -3,12 +3,24 @@ import { Form, Button } from "semantic-ui-react";
 
 import { AppContext } from "../appContext/AppContext.jsx";
 
-const ChooseMonthHistory = ({ userHistory }) => {
+const ChooseMonthHistory = ({ userHistory, type, setType }) => {
   const date = new Date();
   const [month, setMonth] = useState(date.getMonth() + 1);
   const [year, setYear] = useState(date.getFullYear().toString());
   const { setMonthData } = useContext(AppContext);
 
+  const typesOptions = [
+    {
+      key: "credit",
+      value: "credit",
+      text: "Credit",
+    },
+    {
+      key: "debit",
+      value: "debit",
+      text: "Debit",
+    },
+  ];
   const months = [
     "January",
     "February",
@@ -68,6 +80,19 @@ const ChooseMonthHistory = ({ userHistory }) => {
   return (
     <>
       <Form>
+        <Form.Field>
+          <Form.Select
+            search
+            fluid
+            label="Expenses Type"
+            options={typesOptions}
+            value={type}
+            onChange={(_, { value }) => {
+              setType(value);
+            }}
+          />
+        </Form.Field>
+
         <Form.Field>
           <Form.Select
             search
