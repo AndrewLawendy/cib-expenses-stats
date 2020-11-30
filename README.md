@@ -10,7 +10,17 @@ You expenses are displayed through 3 views:
 
 You can check the demo by clicking the link [CIB Expenses Stats](https://cib-expenses-stats.netlify.app/)
 
+JSON Data:
 ![Demo](assets/demo/cib-expenses.gif)
+
+Upload an xlsx:
+![Demo](assets/demo/cib-expenses-debit-credit.gif)
+
+# Change log
+
+- Accept an xlsx file from CIB Historical Statements
+- Distinguish credit from debit data
+- Storing data according to category and display them in the Expenses History page
 
 # Stack
 
@@ -22,6 +32,9 @@ You can check the demo by clicking the link [CIB Expenses Stats](https://cib-exp
 - Yup
 - [@amcharts/amcharts4](https://www.amcharts.com/demos/)
 - use-local-storage-state
+- react-dropzone
+- base64-arraybuffer
+- convert-excel-to-json
 - Linter: ESLint
 - Formatter: Prettier
 - Precommits: Husky and Lint staged
