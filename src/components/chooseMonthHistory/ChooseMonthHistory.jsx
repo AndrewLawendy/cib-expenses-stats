@@ -67,7 +67,7 @@ const ChooseMonthHistory = ({ userHistory, type, setType }) => {
     const key = `${month}-${year}`;
     const { data } = userHistory[key] || { data: [] };
 
-    setMonthData(data);
+    setMonthData({ type, jsonData: data });
   }
 
   useEffect(
