@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Grid } from "semantic-ui-react";
+import { Header, Grid, Message } from "semantic-ui-react";
 
 import {
   useCreditExpensesHistory,
@@ -18,15 +18,24 @@ const ExpensesHistory = () => {
   return (
     <>
       <Header as="h2">Expenses History</Header>
-      <Grid>
-        <Grid.Column width={12}>
-          <MonthsLineChart userHistory={userHistory} />
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <ChooseMonthHistory userHistory={userHistory} />
-        </Grid.Column>
-      </Grid>
-      <OneMonthStats />
+      {userHistory ? (
+        <>
+          <Grid>
+            <Grid.Column width={12}>
+              <MonthsLineChart userHistory={userHistory} />
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <ChooseMonthHistory userHistory={userHistory} />
+            </Grid.Column>
+          </Grid>
+          <OneMonthStats />
+        </>
+      ) : (
+        <Message info>
+          <Message.Header>No expenses history found!</Message.Header>
+          <p>Did you update the history for user {user}?</p>
+        </Message>
+      )}
     </>
   );
 };
