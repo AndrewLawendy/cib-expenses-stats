@@ -72,7 +72,7 @@ const ChooseMonthHistory = ({
 
   useEffect(
     () => () => {
-      setMonthData({ type: "", jsonData: [] });
+      setMonthData({ type: "", accountKey: "", jsonData: [] });
     },
     []
   );

@@ -13,7 +13,7 @@ const JSONDataText = () => {
 
   useEffect(
     () => () => {
-      setMonthData({ type: "", jsonData: [] });
+      setMonthData({ type: "", accountKey: "", jsonData: [] });
     },
     []
   );
@@ -55,7 +55,7 @@ const JSONDataText = () => {
           onChange={(e) => {
             setTextAreaValue(e.target.value);
             setJsonInvalid(false);
-            setMonthData({ type: "", jsonData: [] });
+            setMonthData({ type: "", accountKey: "", jsonData: [] });
           }}
           placeholder="Your credit card JSON"
         />

@@ -25,16 +25,21 @@ const UploadStatement = () => {
         source: encode(result),
       });
       const isCredit = data.some(({ E }) => E === "Type of Credit Card");
-      const jsonData = isCredit
+      const [accountKey, jsonData] = isCredit
         ? constructCreditJsonScheme(data)
         : constructDebitJsonScheme(data);
-      setMonthData({ type: isCredit ? "credit" : "debit", jsonData });
+      setMonthData({
+        type: isCredit ? "credit" : "debit",
+        accountKey,
+        jsonData,
+      });
     };
     reader.readAsArrayBuffer(statementFile);
   }
 
   function constructDebitJsonScheme(data) {
-    return data
+    const { U: accountNumber } = data.find(({ O }) => O === "Account Number");
+    const filteredData = data
       .map(({ C: date, J: description, S: amount }) => {
         return {
           date: date && constructDateOutOfXls(date),
@@ -43,12 +48,15 @@ const UploadStatement = () => {
         };
       })
       .filter(({ date, description, amount }) => date && description && amount);
+
+    return [accountNumber, filteredData];
   }
 
   function constructCreditJsonScheme(data) {
     const { L: statementDate } = data.find(({ E }) => E === "Statement Date");
+    const { L: cardNumber } = data.find(({ E }) => E === "Card Number");
     const [, year] = statementDate.split("-");
-    return data
+    const filteredData = data
       .map(({ E: date, P: description, AG: amount }) => {
         return {
           date: date && `${date}/20${year}`,
@@ -57,11 +65,13 @@ const UploadStatement = () => {
         };
       })
       .filter(({ date, description, amount }) => date && description && amount);
+
+    return [cardNumber, filteredData];
   }
 
   useEffect(
     () => () => {
-      setMonthData({ type: "", jsonData: [] });
+      setMonthData({ type: "", accountKey: "", jsonData: [] });
     },
     []
   );
