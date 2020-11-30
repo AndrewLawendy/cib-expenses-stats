@@ -26,10 +26,13 @@ const UpdateHistory = () => {
     }, 0);
 
     if (!creditExpensesHistory[user]) creditExpensesHistory[user] = {};
+
     if (!creditExpensesHistory[user][type])
       creditExpensesHistory[user][type] = {};
+
     if (!creditExpensesHistory[user][type][accountKey])
       creditExpensesHistory[user][type][accountKey] = {};
+
     if (!creditExpensesHistory[user][type][accountKey])
       creditExpensesHistory[user][type][accountKey] = {};
 

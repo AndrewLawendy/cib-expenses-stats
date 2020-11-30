@@ -41,9 +41,11 @@ function getCreditTable (month, year){
 
   const accountKey = $('.acc_item_active .acc_name .acc_label').text();
 
-  copyToClipboard(JSON.stringify({ accountKey, jsonData}));
-
-  alert('Data for card '+ accountKey + ' are copied successfully.\\nPast them in the JSON Data field!')
+  if(monthData.length > 0) {
+    copyToClipboard(JSON.stringify({ accountKey, jsonData}));
+    alert('Data for card '+ accountKey + ' are copied successfully.\\nPast them in the JSON Data field!');
+  }
+  else alert('Please open a desired credit card tab to copy the data.')
 }
 getCreditTable(${month}, ${year})`;
 
