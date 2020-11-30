@@ -6,7 +6,9 @@ import { AppContext } from "../appContext/AppContext.jsx";
 import styles from "./styles.scss";
 
 const ExpensesTable = () => {
-  const { jsonData } = useContext(AppContext);
+  const {
+    monthData: { jsonData },
+  } = useContext(AppContext);
   const [sortingDirection, setSortingDirection] = useState(null);
   const [filteredData, setFilteredData] = useState(jsonData);
   const [startEndIndexes, setStartEndIndexes] = useState([0, 10]);

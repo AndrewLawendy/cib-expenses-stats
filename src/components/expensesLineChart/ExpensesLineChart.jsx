@@ -12,7 +12,9 @@ am4core.useTheme(am4themes_animated);
 import { AppContext } from "../appContext/AppContext.jsx";
 
 const ExpensesLineChart = () => {
-  const { jsonData } = useContext(AppContext);
+  const {
+    monthData: { jsonData },
+  } = useContext(AppContext);
   const [firstRecord] = jsonData;
   const [, month, year] = firstRecord.date.split("/");
   const lastDay = new Date(year, month, 0).getDate();

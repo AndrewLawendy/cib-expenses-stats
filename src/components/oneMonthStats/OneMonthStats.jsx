@@ -7,7 +7,9 @@ import ExpensesPieChart from "../expensesPieChart/ExpensesPieChart.jsx";
 import ExpensesLineChart from "../expensesLineChart/ExpensesLineChart.jsx";
 
 const OneMonthStats = () => {
-  const { jsonData } = useContext(AppContext);
+  const {
+    monthData: { jsonData },
+  } = useContext(AppContext);
 
   return (
     jsonData.length > 0 && (

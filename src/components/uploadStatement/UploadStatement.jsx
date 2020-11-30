@@ -9,7 +9,7 @@ import { AppContext } from "../appContext/AppContext.jsx";
 import { constructDateOutOfXls } from "../../utils";
 
 const UploadStatement = () => {
-  const { setJsonData } = useContext(AppContext);
+  const { setMonthData } = useContext(AppContext);
   const { getRootProps, getInputProps } = useDropzone({
     accept: ".xls",
     multiple: false,
@@ -26,7 +26,7 @@ const UploadStatement = () => {
       const jsonData = isCredit
         ? constructCreditJsonScheme(data)
         : constructDebitJsonScheme(data);
-      setJsonData(jsonData);
+      setMonthData({ type: isCredit ? "credit" : "debit", jsonData });
     };
     reader.readAsArrayBuffer(statementFile);
   }
@@ -59,7 +59,7 @@ const UploadStatement = () => {
 
   useEffect(
     () => () => {
-      setJsonData([]);
+      setMonthData({ type: "", jsonData: [] });
     },
     []
   );

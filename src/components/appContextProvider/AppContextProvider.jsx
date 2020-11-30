@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { AppContext } from "../appContext/AppContext.jsx";
 
 const AppContextProvider = ({ children }) => {
-  const [jsonData, setJsonData] = useState([]);
+  const [monthData, setMonthData] = useState({ type: "", jsonData: [] });
 
   return (
     <AppContext.Provider
       value={{
-        jsonData,
-        setJsonData,
+        monthData,
+        setMonthData,
       }}
     >
       {children}

@@ -7,7 +7,7 @@ const ChooseMonthHistory = ({ userHistory }) => {
   const date = new Date();
   const [month, setMonth] = useState(date.getMonth() + 1);
   const [year, setYear] = useState(date.getFullYear().toString());
-  const { setJsonData } = useContext(AppContext);
+  const { setMonthData } = useContext(AppContext);
 
   const months = [
     "January",
@@ -55,12 +55,12 @@ const ChooseMonthHistory = ({ userHistory }) => {
     const key = `${month}-${year}`;
     const { data } = userHistory[key] || { data: [] };
 
-    setJsonData(data);
+    setMonthData(data);
   }
 
   useEffect(
     () => () => {
-      setJsonData([]);
+      setMonthData({ type: "", jsonData: [] });
     },
     []
   );

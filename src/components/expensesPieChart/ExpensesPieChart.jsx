@@ -8,7 +8,9 @@ am4core.useTheme(am4themes_animated);
 import { AppContext } from "../appContext/AppContext.jsx";
 
 const ExpensesPieChart = () => {
-  const { jsonData } = useContext(AppContext);
+  const {
+    monthData: { jsonData },
+  } = useContext(AppContext);
   const summedDescription = jsonData.reduce((acc, { description, amount }) => {
     if (!acc[description]) acc[description] = 0;
     acc[description] += amount;

@@ -9,11 +9,11 @@ import styles from "./styles.scss";
 const JSONDataText = () => {
   const [jsonInvalid, setJsonInvalid] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState("");
-  const { setJsonData } = useContext(AppContext);
+  const { setMonthData } = useContext(AppContext);
 
   useEffect(
     () => () => {
-      setJsonData([]);
+      setMonthData({ type: "", jsonData: [] });
     },
     []
   );
@@ -23,12 +23,12 @@ const JSONDataText = () => {
     if (textAreaValue) {
       try {
         jsonData = JSON.parse(textAreaValue);
-        setJsonData(jsonData);
+        setMonthData({ type: "credit", jsonData });
       } catch {
         setJsonInvalid(true);
       }
     } else {
-      setJsonData(jsonData);
+      setMonthData({ type: "credit", jsonData });
     }
   }
 
@@ -55,7 +55,7 @@ const JSONDataText = () => {
           onChange={(e) => {
             setTextAreaValue(e.target.value);
             setJsonInvalid(false);
-            setJsonData([]);
+            setMonthData({ type: "", jsonData: [] });
           }}
           placeholder="Your credit card JSON"
         />

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
 export const AppContext = createContext({
-  jsonData: [],
-  setJsonData: (_data) => {},
+  monthData: { type: "", jsonData: [] },
+  setMonthData: (_data) => {},
 });
