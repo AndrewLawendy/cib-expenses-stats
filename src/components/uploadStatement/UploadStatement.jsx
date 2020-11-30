@@ -6,6 +6,8 @@ import { encode } from "base64-arraybuffer";
 import styles from "./styles.scss";
 
 import { AppContext } from "../appContext/AppContext.jsx";
+import UpdateHistory from "../updateHistory/UpdateHistory.jsx";
+
 import { constructDateOutOfXls } from "../../utils";
 
 const UploadStatement = () => {
@@ -65,9 +67,12 @@ const UploadStatement = () => {
   );
 
   return (
-    <div {...getRootProps({ className: styles.dropZone })}>
-      <input multiple={false} {...getInputProps()} />
-      <p>Drag and drop statement file here, or click to select the file</p>
+    <div className={styles.uploadContainer}>
+      <div {...getRootProps({ className: styles.dropZone })}>
+        <input multiple={false} {...getInputProps()} />
+        <p>Drag and drop statement file here, or click to select the file</p>
+      </div>
+      <UpdateHistory />
     </div>
   );
 };
