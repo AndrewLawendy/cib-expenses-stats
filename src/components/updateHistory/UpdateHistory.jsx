@@ -14,12 +14,10 @@ const UpdateHistory = () => {
   ] = useCreditExpensesHistory();
   const [user] = useUser();
   const {
-    monthData: { type, jsonData },
+    monthData: { type, accountKey, jsonData },
   } = useContext(AppContext);
 
   function updateHistory() {
-    const userHistory = creditExpensesHistory[user] || {};
-    const userTypeHistory = userHistory[type] || {};
     const [, month, year] = jsonData[0].date.split("/");
     const monthHistoryKey = `${month}-${year}`;
     const total = jsonData.reduce((acc, { amount }) => {
@@ -27,16 +25,20 @@ const UpdateHistory = () => {
       return acc;
     }, 0);
 
-    setCreditExpensesHistory({
-      ...creditExpensesHistory,
-      [user]: {
-        ...userHistory,
-        [type]: {
-          ...userTypeHistory,
-          [monthHistoryKey]: { total, data: jsonData },
-        },
-      },
-    });
+    if (!creditExpensesHistory[user]) creditExpensesHistory[user] = {};
+    if (!creditExpensesHistory[user][type])
+      creditExpensesHistory[user][type] = {};
+    if (!creditExpensesHistory[user][type][accountKey])
+      creditExpensesHistory[user][type][accountKey] = {};
+    if (!creditExpensesHistory[user][type][accountKey])
+      creditExpensesHistory[user][type][accountKey] = {};
+
+    creditExpensesHistory[user][type][accountKey][monthHistoryKey] = {
+      total,
+      data: jsonData,
+    };
+
+    setCreditExpensesHistory(creditExpensesHistory);
   }
 
   return (
