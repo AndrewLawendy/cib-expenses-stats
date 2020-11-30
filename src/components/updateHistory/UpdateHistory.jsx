@@ -48,7 +48,7 @@ const UpdateHistory = () => {
       }
       dimmer="blurring"
       header="Are you sure?"
-      content={`Storing expenses history to user "${user}"?`}
+      content={`Storing expenses history to user "${user}" in the ${type} category?`}
       actions={[
         "No",
         {
