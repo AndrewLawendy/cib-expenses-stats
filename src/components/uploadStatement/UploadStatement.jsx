@@ -22,17 +22,34 @@ const UploadStatement = () => {
       const { Sheet1: data } = excelToJson({
         source: encode(result),
       });
-      const jsonData = constructJsonScheme(data);
+      const isCredit = data.some(({ E }) => E === "Type of Credit Card");
+      const jsonData = isCredit
+        ? constructCreditJsonScheme(data)
+        : constructDebitJsonScheme(data);
       setJsonData(jsonData);
     };
     reader.readAsArrayBuffer(statementFile);
   }
 
-  function constructJsonScheme(data) {
+  function constructDebitJsonScheme(data) {
     return data
       .map(({ C: date, J: description, S: amount }) => {
         return {
           date: date && constructDateOutOfXls(date),
+          description,
+          amount: amount && Number(amount.replace(",", "")),
+        };
+      })
+      .filter(({ date, description, amount }) => date && description && amount);
+  }
+
+  function constructCreditJsonScheme(data) {
+    const { L: statementDate } = data.find(({ E }) => E === "Statement Date");
+    const [, year] = statementDate.split("-");
+    return data
+      .map(({ E: date, P: description, AG: amount }) => {
+        return {
+          date: date && `${date}/20${year}`,
           description,
           amount: amount && Number(amount.replace(",", "")),
         };
