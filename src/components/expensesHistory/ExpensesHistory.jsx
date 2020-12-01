@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Header, Grid, Message } from "semantic-ui-react";
 
 import {
-  useCreditExpensesHistory,
+  useCibExpensesHistory,
   useUser,
 } from "../../utils/localStorageHooks.js";
 
@@ -16,9 +16,9 @@ const ExpensesHistory = () => {
   const [year, setYear] = useState(date.getFullYear().toString());
   const [type, setType] = useState("credit");
 
-  const [creditExpensesHistory] = useCreditExpensesHistory();
+  const [cibExpensesHistory] = useCibExpensesHistory();
   const [user] = useUser();
-  const allUserHistory = creditExpensesHistory[user] || {};
+  const allUserHistory = cibExpensesHistory[user] || {};
   const userHistory = allUserHistory[type] || {};
   const accountKeys = Object.keys(userHistory);
   const [firstKey] = accountKeys;

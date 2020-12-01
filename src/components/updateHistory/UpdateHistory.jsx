@@ -2,16 +2,13 @@ import React, { useContext } from "react";
 import { Modal, Button } from "semantic-ui-react";
 
 import {
-  useCreditExpensesHistory,
+  useCibExpensesHistory,
   useUser,
 } from "../../utils/localStorageHooks.js";
 import { AppContext } from "../appContext/AppContext.jsx";
 
 const UpdateHistory = () => {
-  const [
-    creditExpensesHistory,
-    setCreditExpensesHistory,
-  ] = useCreditExpensesHistory();
+  const [cibExpensesHistory, setCibExpensesHistory] = useCibExpensesHistory();
   const [user] = useUser();
   const {
     monthData: { type, accountKey, jsonData },
@@ -25,23 +22,22 @@ const UpdateHistory = () => {
       return acc;
     }, 0);
 
-    if (!creditExpensesHistory[user]) creditExpensesHistory[user] = {};
+    if (!cibExpensesHistory[user]) cibExpensesHistory[user] = {};
 
-    if (!creditExpensesHistory[user][type])
-      creditExpensesHistory[user][type] = {};
+    if (!cibExpensesHistory[user][type]) cibExpensesHistory[user][type] = {};
 
-    if (!creditExpensesHistory[user][type][accountKey])
-      creditExpensesHistory[user][type][accountKey] = {};
+    if (!cibExpensesHistory[user][type][accountKey])
+      cibExpensesHistory[user][type][accountKey] = {};
 
-    if (!creditExpensesHistory[user][type][accountKey])
-      creditExpensesHistory[user][type][accountKey] = {};
+    if (!cibExpensesHistory[user][type][accountKey])
+      cibExpensesHistory[user][type][accountKey] = {};
 
-    creditExpensesHistory[user][type][accountKey][monthHistoryKey] = {
+    cibExpensesHistory[user][type][accountKey][monthHistoryKey] = {
       total,
       data: jsonData,
     };
 
-    setCreditExpensesHistory(creditExpensesHistory);
+    setCibExpensesHistory(cibExpensesHistory);
   }
 
   return (
