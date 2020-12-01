@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Header, Grid, Message } from "semantic-ui-react";
 
 import {
@@ -19,15 +19,23 @@ const ExpensesHistory = () => {
   const [creditExpensesHistory] = useCreditExpensesHistory();
   const [user] = useUser();
   const allUserHistory = creditExpensesHistory[user] || {};
-  const userHistory = allUserHistory[type];
+  const userHistory = allUserHistory[type] || {};
+  const accountKeys = Object.keys(userHistory);
+  const [firstKey] = accountKeys;
+  const [accountKey, setAccountKey] = useState(firstKey);
+  const accountHistory = userHistory[accountKey];
+
+  useEffect(() => {
+    setAccountKey(firstKey);
+  }, [firstKey]);
 
   return (
     <>
       <Header as="h2">Expenses History</Header>
       <Grid>
         <Grid.Column width={12}>
-          {userHistory ? (
-            <MonthsLineChart userHistory={userHistory} year={year} />
+          {accountHistory ? (
+            <MonthsLineChart accountHistory={accountHistory} year={year} />
           ) : (
             <Message info>
               <Message.Header>No expenses history found!</Message.Header>
@@ -40,8 +48,18 @@ const ExpensesHistory = () => {
         </Grid.Column>
         <Grid.Column width={4}>
           <ChooseMonthHistory
-            userHistory={userHistory}
-            formControl={{ type, setType, month, setMonth, year, setYear }}
+            accountHistory={accountHistory}
+            accountKeys={accountKeys}
+            formControl={{
+              type,
+              setType,
+              month,
+              setMonth,
+              year,
+              setYear,
+              accountKey,
+              setAccountKey,
+            }}
           />
         </Grid.Column>
       </Grid>

@@ -4,8 +4,18 @@ import { Form, Button } from "semantic-ui-react";
 import { AppContext } from "../appContext/AppContext.jsx";
 
 const ChooseMonthHistory = ({
-  userHistory,
-  formControl: { type, setType, month, setMonth, year, setYear },
+  accountHistory,
+  accountKeys,
+  formControl: {
+    type,
+    setType,
+    month,
+    setMonth,
+    year,
+    setYear,
+    accountKey,
+    setAccountKey,
+  },
 }) => {
   const { setMonthData } = useContext(AppContext);
 
@@ -35,18 +45,23 @@ const ChooseMonthHistory = ({
     "November",
     "December",
   ];
-  const yearsOptions = userHistory && getYears(userHistory);
+  const yearsOptions = getYears(accountHistory);
   const monthsOptions = Array.from({ length: 12 }, (_, i) => ({
     key: months[i],
     text: months[i],
     value: i + 1,
   }));
+  const accountKeysOptions = accountKeys.map((key) => ({
+    key,
+    text: key,
+    value: key,
+  }));
 
-  function getYears(userHistory) {
+  function getYears(history) {
     const uniqueYears = [];
 
-    for (const key in userHistory) {
-      if (userHistory.hasOwnProperty(key)) {
+    for (const key in history) {
+      if (history.hasOwnProperty(key)) {
         const [, year] = key.split("-");
         if (!uniqueYears.some(({ value }) => value === year)) {
           uniqueYears.push({
@@ -65,9 +80,9 @@ const ChooseMonthHistory = ({
 
   function passMonthData() {
     const key = `${month}-${year}`;
-    const { data } = userHistory[key] || { data: [] };
+    const { data } = accountHistory[key] || { data: [] };
 
-    setMonthData({ type, jsonData: data });
+    setMonthData({ type, accountKey, jsonData: data });
   }
 
   useEffect(
@@ -89,11 +104,12 @@ const ChooseMonthHistory = ({
             value={type}
             onChange={(_, { value }) => {
               setType(value);
+              setMonthData({ type: "", accountKey: "", jsonData: [] });
             }}
           />
         </Form.Field>
 
-        {userHistory && (
+        {accountHistory && (
           <>
             <Form.Field>
               <Form.Select
@@ -117,6 +133,19 @@ const ChooseMonthHistory = ({
                 value={year}
                 onChange={(_, { value }) => {
                   setYear(value);
+                }}
+              />
+            </Form.Field>
+
+            <Form.Field>
+              <Form.Select
+                search
+                fluid
+                label={type === "credit" ? "Card Numbers" : "Account Numbers"}
+                options={accountKeysOptions}
+                value={accountKey}
+                onChange={(_, { value }) => {
+                  setAccountKey(value);
                 }}
               />
             </Form.Field>

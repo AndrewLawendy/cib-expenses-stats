@@ -5,11 +5,11 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 am4core.useTheme(am4themes_animated);
 
-const MonthsLineChart = ({ userHistory, year }) => {
+const MonthsLineChart = ({ accountHistory, year }) => {
   const data = Array.from({ length: 12 }, (_, i) => {
     const chosenYear = year;
     const historyKey = `${i + 1}-${chosenYear}`;
-    const { total } = userHistory[historyKey] || { total: 0 };
+    const { total } = accountHistory[historyKey] || { total: 0 };
 
     return { date: new Date(chosenYear, i), total };
   });
@@ -39,7 +39,7 @@ const MonthsLineChart = ({ userHistory, year }) => {
 
     //chart.scrollbarY = new am4core.Scrollbar();
     chart.scrollbarX = new am4core.Scrollbar();
-  }, [userHistory, year]);
+  }, [accountHistory, year]);
 
   return (
     <div
