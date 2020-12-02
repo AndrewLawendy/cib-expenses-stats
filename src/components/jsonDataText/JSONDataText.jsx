@@ -21,7 +21,11 @@ const JSONDataText = () => {
   function generateDate() {
     if (textAreaValue) {
       try {
-        const { accountKey, jsonData } = JSON.parse(textAreaValue);
+        const { rawCardNumber, jsonData } = JSON.parse(textAreaValue);
+        const accountKey = `${rawCardNumber.slice(
+          0,
+          4
+        )} **** **** ${rawCardNumber.slice(-4)}`;
         setMonthData({ type: "credit", accountKey, jsonData });
       } catch {
         setJsonInvalid(true);

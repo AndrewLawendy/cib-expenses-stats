@@ -39,11 +39,11 @@ function getCreditTable (month, year){
       return rowMonth == month && rowYear == year && row.debitOrCredit !== 'Credit'
   });
 
-  const accountKey = $('.acc_item_active .acc_name .acc_label').text();
+  const rawCardNumber = $('.acc_item_active .acc_name .acc_label').text();
 
   if(monthData.length > 0) {
-    copyToClipboard(JSON.stringify({ accountKey, jsonData}));
-    alert('Data for card '+ accountKey + ' are copied successfully.\\nPast them in the JSON Data field!');
+    copyToClipboard(JSON.stringify({ rawCardNumber, jsonData}));
+    alert('Data for card '+ rawCardNumber + ' are copied successfully.\\nPast them in the JSON Data field!');
   }
   else alert('Please open a desired credit card tab to copy the data.')
 }

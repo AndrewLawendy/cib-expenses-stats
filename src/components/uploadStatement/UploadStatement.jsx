@@ -54,7 +54,11 @@ const UploadStatement = () => {
 
   function constructCreditJsonScheme(data) {
     const { L: statementDate } = data.find(({ E }) => E === "Statement Date");
-    const { L: cardNumber } = data.find(({ E }) => E === "Card Number");
+    const { L: rawCardNumber } = data.find(({ E }) => E === "Card Number");
+    const cardNumber = `${rawCardNumber.slice(
+      0,
+      4
+    )} **** **** ${rawCardNumber.slice(-4)}`;
     const [, year] = statementDate.split("-");
     const filteredData = data
       .map(({ E: date, P: description, AG: amount }) => {
