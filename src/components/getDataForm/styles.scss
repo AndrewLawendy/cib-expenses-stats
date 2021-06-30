@@ -1,0 +1,11 @@
+.buttonWrapper {
+  position: relative;
+
+  .successMessage {
+    position: absolute !important;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

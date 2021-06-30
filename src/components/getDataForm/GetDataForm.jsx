@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Button, Header } from "semantic-ui-react";
+import { Button, Header, Label, Transition } from "semantic-ui-react";
 
 import { SemanticFormikInputField } from "../semanticFormikInputField/SemanticFormikInputField.jsx";
 
 import { copyToClipboard, getDataFunction } from "../../utils";
+
+import styles from "./styles.scss";
 
 const validationScheme = Yup.object().shape({
   month: Yup.number().min(1).max(12).required("Month is required"),
@@ -17,12 +19,23 @@ const initialValues = {
   year: new Date().getFullYear(),
 };
 
-const onSubmit = ({ month, year }) => {
-  const functionString = getDataFunction(month, year);
-  copyToClipboard(functionString);
-};
-
 const GetDataForm = () => {
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const showCopySuccess = () => {
+    setShowSuccess(true);
+
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 5000);
+  };
+
+  const onSubmit = ({ month, year }) => {
+    const functionString = getDataFunction(month, year);
+    copyToClipboard(functionString);
+    showCopySuccess();
+  };
+
   return (
     <>
       <Header as="h2">Get Function Form</Header>
@@ -51,10 +64,23 @@ const GetDataForm = () => {
               max="2120"
               component={SemanticFormikInputField}
             />
-
-            <Button type="submit" disabled={!isValid} primary>
-              Get Function
-            </Button>
+            <div className={styles.buttonWrapper}>
+              <Button type="submit" disabled={!isValid} primary>
+                Get Function
+              </Button>
+              <Transition.Group animation="fade down" duration={500}>
+                {showSuccess && (
+                  <Label
+                    pointing="left"
+                    color="green"
+                    className={styles.successMessage}
+                  >
+                    <p>Function copied successfully</p>
+                    <p>Please paste it in the CIB console tab</p>
+                  </Label>
+                )}
+              </Transition.Group>
+            </div>
           </Form>
         )}
       </Formik>

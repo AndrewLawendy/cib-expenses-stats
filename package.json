@@ -5,7 +5,7 @@
   "main": "src/App.jsx",
   "scripts": {
     "clear-build-cache": "rm -rf .cache/ dist/",
-    "dev": "parcel src/index.html",
+    "dev": "parcel src/index.html --open",
     "build": "parcel build src/index.html --no-source-maps",
     "format": "prettier --write \"src/**/*.{js,jsx,scss}\"",
     "lint": "eslint \"src/**/*.{js,jsx,scss}\" --fix --cache --quiet"
